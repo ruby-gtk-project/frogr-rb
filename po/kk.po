@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: frogr master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/frogr/issues/\n"
 "POT-Creation-Date: 2025-11-21 13:31+0000\n"
-"PO-Revision-Date: 2026-03-15 17:51+0500\n"
+"PO-Revision-Date: 2026-08-22 08:41+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <Kazakh>\n"
 "Language: kk\n"
@@ -30,8 +30,7 @@ msgstr "frogr: GNOME арналған Flickr қашықтағы ұйымдаст
 msgid "Upload and organize photos in Flickr accounts"
 msgstr "Flickr тіркелгілеріндегі суреттерді жүктеп салу және ұйымдастыру"
 
-#. Translators: Search terms to find this application. Do NOT translate or
-#. localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: data/org.gnome.frogr.desktop.in.in:8
 msgid "Flickr;Image;Picture;Photo;Video;Uploader;"
 msgstr "Flickr;Сурет;Сурет;Сурет;Видео;Жүктеуші;"
@@ -54,12 +53,16 @@ msgid ""
 "adding descriptions, setting tags and managing sets and groups pools."
 msgstr ""
 "Ол Flickr-дің барлық негізгі мүмкіндіктерін қолдайды, соның ішінде "
-"суреттерді жүктеп салу, сипаттамалар қосу, тегтерді орнату және жинақтар "
-"мен топтарды басқару."
+"суреттерді жүктеп салу, сипаттамалар қосу, тегтерді орнату және жинақтар мен "
+"топтарды басқару."
 
 #: data/org.gnome.frogr.metainfo.xml.in:25
 msgid "Screenshot of frogr"
 msgstr "frogr скриншоты"
+
+#: data/org.gnome.frogr.metainfo.xml.in:33
+msgid "Mario Sanchez Prada"
+msgstr "Mario Sanchez Prada"
 
 #: src/frogr-about-dialog.c:43
 msgid "A Flickr Remote Organizer for GNOME\n"
@@ -829,39 +832,33 @@ msgstr "Әр_түрлі"
 msgid "Preferences"
 msgstr "Баптаулар"
 
-#: data/gtkbuilder/frogr-context-menu.ui:6
-#: data/gtkbuilder/frogr-menu-bar.ui:71
+#: data/gtkbuilder/frogr-context-menu.ui:6 data/gtkbuilder/frogr-menu-bar.ui:71
 #: data/gtkbuilder/frogr-menu-button.ui:24
 msgid "_Edit Details…"
 msgstr "Мәліметтерді _түзету…"
 
 #: data/gtkbuilder/frogr-context-menu.ui:11
-#: data/gtkbuilder/frogr-menu-bar.ui:76
-#: data/gtkbuilder/frogr-menu-button.ui:29
+#: data/gtkbuilder/frogr-menu-bar.ui:76 data/gtkbuilder/frogr-menu-button.ui:29
 msgid "Add _Tags…"
 msgstr "_Тегтерді қосу…"
 
 #: data/gtkbuilder/frogr-context-menu.ui:16
-#: data/gtkbuilder/frogr-menu-bar.ui:81
-#: data/gtkbuilder/frogr-menu-button.ui:34
+#: data/gtkbuilder/frogr-menu-bar.ui:81 data/gtkbuilder/frogr-menu-button.ui:34
 msgid "Add to _Group…"
 msgstr "Т_опқа қосу…"
 
 #: data/gtkbuilder/frogr-context-menu.ui:21
-#: data/gtkbuilder/frogr-menu-bar.ui:86
-#: data/gtkbuilder/frogr-menu-button.ui:39
+#: data/gtkbuilder/frogr-menu-bar.ui:86 data/gtkbuilder/frogr-menu-button.ui:39
 msgid "Add to _Photoset"
 msgstr "_Фотожинаққа қосу"
 
 #: data/gtkbuilder/frogr-context-menu.ui:24
-#: data/gtkbuilder/frogr-menu-bar.ui:89
-#: data/gtkbuilder/frogr-menu-button.ui:42
+#: data/gtkbuilder/frogr-menu-bar.ui:89 data/gtkbuilder/frogr-menu-button.ui:42
 msgid "_Add to Existing Photoset…"
 msgstr "Бар фотожинаққа қ_осу…"
 
 #: data/gtkbuilder/frogr-context-menu.ui:29
-#: data/gtkbuilder/frogr-menu-bar.ui:94
-#: data/gtkbuilder/frogr-menu-button.ui:47
+#: data/gtkbuilder/frogr-menu-bar.ui:94 data/gtkbuilder/frogr-menu-button.ui:47
 msgid "_Create New Photoset…"
 msgstr "Жаңа фотожинақ _жасау…"
 
@@ -907,8 +904,7 @@ msgstr "_Файл"
 msgid "_Open…"
 msgstr "_Ашу…"
 
-#: data/gtkbuilder/frogr-menu-bar.ui:24
-#: data/gtkbuilder/frogr-menu-button.ui:17
+#: data/gtkbuilder/frogr-menu-bar.ui:24 data/gtkbuilder/frogr-menu-button.ui:17
 msgid "Save _As…"
 msgstr "Қалайша _сақтау…"
 
