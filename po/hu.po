@@ -1,17 +1,17 @@
 # Hungarian translation for frogr.
-# Copyright (C) 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2024 Free Software Foundation, Inc.
+# Copyright (C) 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2024, 2026 Free Software Foundation, Inc.
 # This file is distributed under the same license as the frogr package.
 #
 # paradigma <mezi.zoltan at gmail dot com>, 2013.
 # Gabor Kelemen <kelemeng at gnome dot hu>, 2014.
 # Attila Hammer <hammera at pickup dot hu>, 2014.
-# Balázs Úr <ur.balazs at fsf dot hu>, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2024.
+# Balázs Úr <ur.balazs at fsf dot hu>, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2024, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: frogr master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/frogr/issues/\n"
-"POT-Creation-Date: 2024-01-08 16:31+0000\n"
-"PO-Revision-Date: 2024-02-19 17:52+0100\n"
+"POT-Creation-Date: 2025-11-21 13:31+0000\n"
+"PO-Revision-Date: 2026-09-01 09:55+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
@@ -19,17 +19,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 25.12.3\n"
 
-#: data/org.gnome.frogr.appdata.xml.in:7 data/org.gnome.frogr.desktop.in.in:5
+#: data/org.gnome.frogr.desktop.in.in:4 data/org.gnome.frogr.metainfo.xml.in:7
 msgid "frogr"
 msgstr "frogr"
 
-#: data/org.gnome.frogr.appdata.xml.in:8
+#: data/org.gnome.frogr.desktop.in.in:5
+msgid "frogr: a Flickr Remote Organizer for GNOME"
+msgstr "frogr: egy távoli Flickr szervező a GNOME-hoz"
+
+#: data/org.gnome.frogr.desktop.in.in:6
+msgid "Upload and organize photos in Flickr accounts"
+msgstr "Fényképek feltöltése és rendszerezése a Flickr fiókjában"
+
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: data/org.gnome.frogr.desktop.in.in:8
+msgid "Flickr;Image;Picture;Photo;Video;Uploader;"
+msgstr "Flickr;kép;fénykép;fotó;videó;video;feltöltő;"
+
+#: data/org.gnome.frogr.metainfo.xml.in:8
 msgid "A flickr uploader for GNOME"
 msgstr "Egy Flickr feltöltő a GNOME-hoz"
 
-#: data/org.gnome.frogr.appdata.xml.in:10
+#: data/org.gnome.frogr.metainfo.xml.in:10
 msgid ""
 "frogr allows users to manage their accounts on the Flickr photo hosting "
 "service with a simple and direct interface."
@@ -38,7 +51,7 @@ msgstr ""
 "felületen keresztül kezeljék a fiókjaikat a Flickr képmegosztó "
 "szolgáltatásnál."
 
-#: data/org.gnome.frogr.appdata.xml.in:14
+#: data/org.gnome.frogr.metainfo.xml.in:14
 msgid ""
 "It supports all the basic Flickr features, including uploading pictures, "
 "adding descriptions, setting tags and managing sets and groups pools."
@@ -46,22 +59,13 @@ msgstr ""
 "Az összes alapvető Flickr funkció támogatott, például képfájlok feltöltése, "
 "leírások hozzáadása, címkék beállítása és csoportgyűjtemények kezelése."
 
-#: data/org.gnome.frogr.appdata.xml.in:25
+#: data/org.gnome.frogr.metainfo.xml.in:25
 msgid "Screenshot of frogr"
 msgstr "A frogr képernyőképe"
 
-#: data/org.gnome.frogr.desktop.in.in:6
-msgid "frogr: a Flickr Remote Organizer for GNOME"
-msgstr "frogr: egy távoli Flickr szervező a GNOME-hoz"
-
-#: data/org.gnome.frogr.desktop.in.in:7
-msgid "Upload and organize photos in Flickr accounts"
-msgstr "Fényképek feltöltése és rendszerezése a Flickr fiókjában"
-
-#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: data/org.gnome.frogr.desktop.in.in:9
-msgid "Flickr;Image;Picture;Photo;Video;Uploader;"
-msgstr "Flickr;kép;fénykép;fotó;videó;video;feltöltő;"
+#: data/org.gnome.frogr.metainfo.xml.in:33
+msgid "Mario Sanchez Prada"
+msgstr "Mario Sanchez Prada"
 
 #: src/frogr-about-dialog.c:43
 msgid "A Flickr Remote Organizer for GNOME\n"
@@ -316,9 +320,6 @@ msgstr ""
 
 #: src/frogr-controller.c:666
 #, c-format
-#| msgid ""
-#| "Invalid verification code.\n"
-#| "Please try again."
 msgid ""
 "Invalid signature.\n"
 "Please try again."
@@ -392,7 +393,7 @@ msgstr "Nem találhatók albumok"
 msgid "No groups found"
 msgstr "Nem találhatók csoportok"
 
-#: src/frogr-controller.c:2910
+#: src/frogr-controller.c:2911
 #, c-format
 msgid ""
 "You need to properly authorize %s before uploading any pictures to Flickr.\n"
@@ -402,16 +403,16 @@ msgstr ""
 "szükséges.\n"
 "Próbálja meg újra felhatalmazni."
 
-#: src/frogr-controller.c:2919
+#: src/frogr-controller.c:2920
 #, c-format
 msgid "You need to be connected before uploading any pictures to Flickr."
 msgstr "Csatlakoznia kell, mielőtt bármilyen képet töltene fel a Flickr-be."
 
-#: src/frogr-controller.c:2936
+#: src/frogr-controller.c:2937
 msgid "Uploading Pictures"
 msgstr "Képek feltöltése"
 
-#: src/frogr-controller.c:2981
+#: src/frogr-controller.c:2982
 #, c-format
 msgid "Error opening project file"
 msgstr "Hiba a projektfájl megnyitásakor"
