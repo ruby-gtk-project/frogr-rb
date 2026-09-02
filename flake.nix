@@ -22,18 +22,23 @@
         let
           env = pkgs.callPackage ./nix/gems.nix { };
 
-          # Everything the ruby-gnome stack dlopen()s or introspects at runtime.
+          # Everything the ruby-gnome stack introspects at runtime.
+          #
+          # The `.out` selections are deliberate: mkShell splices split-output
+          # packages to their `bin`/`dev` outputs, and the GObject typelibs
+          # live in `out`. Without this, GI_TYPELIB_PATH points at glib-bin,
+          # which has no typelibs, and `require "gtk4"` fails on Gio.
           runtimeLibs = with pkgs; [
-            glib
-            gtk4
-            libadwaita
-            gdk-pixbuf
-            graphene
-            pango
-            cairo
-            atk
-            harfbuzz
-            librsvg
+            glib.out
+            gtk4.out
+            libadwaita.out
+            gdk-pixbuf.out
+            graphene.out
+            pango.out
+            cairo.out
+            atk.out
+            harfbuzz.out
+            librsvg.out
           ];
         in
         {
@@ -42,7 +47,6 @@
 
             packages = with pkgs; [
               env.wrappedRuby
-              bundler
               bundix
               pkg-config
               gtk4.dev
@@ -53,6 +57,9 @@
             ] ++ runtimeLibs;
 
             shellHook = ''
+              # bundix propagates a plain ruby; the wrapped one — the only ruby
+              # that can see the bundled gems — has to win the PATH race.
+              export PATH="${env.wrappedRuby}/bin:$PATH"
               export GI_TYPELIB_PATH="${pkgs.lib.makeSearchPath "lib/girepository-1.0" runtimeLibs}"
               export XDG_DATA_DIRS="${pkgs.gtk4}/share:${pkgs.libadwaita}/share:${pkgs.shared-mime-info}/share:''${XDG_DATA_DIRS:-}"
               export GSETTINGS_SCHEMA_DIR="${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas"

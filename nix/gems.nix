@@ -44,10 +44,11 @@
 , libpthread-stubs
 , libxkbcommon
 , util-linux
+, libxdmcp
+, libxtst
 , libselinux
 , libsepol
 , systemd
-, xorg
 }:
 
 let
@@ -77,8 +78,8 @@ let
     zstd
     libpthread-stubs
     libxkbcommon
-    xorg.libXdmcp
-    xorg.libXtst
+    libxdmcp
+    libxtst
   ];
 
   # ruby-gnome's extconf.rb shells out to rake and bundler while generating

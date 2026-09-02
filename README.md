@@ -23,6 +23,16 @@ or, without entering a shell:
 nix run
 ```
 
+## Tests
+
+```sh
+nix develop --command ruby test/run_tests.rb
+```
+
+These cover the places where a subtle mistake would not show up in the UI:
+OAuth 1.0a signature base strings, EXIF/XMP parsing, tag quoting, and the two
+on-disk formats that must stay compatible with upstream frogr.
+
 ## Layout
 
 ```
@@ -38,6 +48,18 @@ lib/frogr/
 data/                  icons, desktop file, appstream metadata, man page
 po/, help/             translations and user documentation (carried over)
 ```
+
+## Notes on the bindings
+
+The `ruby-gtk` house guide records `Adwaita::ApplicationWindow` as unusable
+from Ruby. That is no longer true as of **ruby-gnome 4.3.8**: it builds,
+accepts actions, and — unlike `Gtk::ApplicationWindow` — lets `Adwaita::Dialog`
+present *inside* the window rather than spawning a separate toplevel. This port
+uses it, verified against its full widget tree, actions and dialogs.
+
+`Gtk::IconTheme` exposes `get_for_display`, not `for_display`, and setting
+`GtkSettings:gtk-application-prefer-dark-theme` is unsupported under libadwaita
+— the dark theme preference goes through `Adwaita::StyleManager#color_scheme`.
 
 ## Relocking the gems
 
