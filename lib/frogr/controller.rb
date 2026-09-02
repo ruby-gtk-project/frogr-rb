@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'adwaita'
 require 'gtk4'
 
 require_relative 'config'
@@ -268,9 +269,12 @@ module Frogr
       end
     end
 
+    # Libadwaita owns the light/dark decision, so this goes through its style
+    # manager rather than the GtkSettings property the C version set.
     def use_dark_theme=(value)
       config.use_dark_theme = value
-      Gtk::Settings.default.gtk_application_prefer_dark_theme = value
+      Adwaita::StyleManager.default.color_scheme =
+        value ? Adwaita::ColorScheme::FORCE_DARK : Adwaita::ColorScheme::DEFAULT
     end
 
     private

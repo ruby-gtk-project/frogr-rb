@@ -109,7 +109,7 @@ module Frogr
       Exif.read(path).then do |metadata|
         picture.datetime = metadata.datetime
         picture.location = metadata.location
-        picture.tags = metadata.keywords.join(' ') if @config.import_tags_from_metadata
+        picture.tags = Models::Picture.join_tags(metadata.keywords) if @config.import_tags_from_metadata
       end
     end
 

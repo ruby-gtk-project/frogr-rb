@@ -77,7 +77,13 @@ module Frogr
         @tags = []
       end
 
-      def tags_string = @tags.map { |t| t.include?(' ') ? "\"#{t}\"" : t }.join(TAG_DELIMITER)
+      def tags_string = Picture.join_tags(@tags)
+
+      # Flickr separates tags by spaces, so a tag containing one has to be
+      # quoted or it comes back as two tags on the next round trip.
+      def self.join_tags(tags)
+        tags.map { |tag| tag.to_s.include?(' ') ? "\"#{tag}\"" : tag.to_s }.join(TAG_DELIMITER)
+      end
 
       # Splits on whitespace but keeps quoted runs together, so
       # `holidays "san francisco"` yields two tags, not three.

@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# frogr — Flickr Remote Organizer.
+#
+# FROGR_LIB_DIR is set by the Nix wrapper; running from a checkout falls back
+# to the sibling lib/ directory.
+$LOAD_PATH.unshift(ENV.fetch('FROGR_LIB_DIR', File.expand_path('../lib', __dir__)))
+
+require 'frogr/app'
+
+Frogr::App.new(files: ARGV.select { |path| File.file?(path) }).build.run

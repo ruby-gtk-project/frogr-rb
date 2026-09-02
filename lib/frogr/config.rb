@@ -253,7 +253,7 @@ module Frogr
       FileUtils.mkdir_p(config_dir)
 
       File.join(config_dir, filename).then do |path|
-        File.write(path, String.new.tap { |out| document.write(out, 2) })
+        File.write(path, String.new.tap { |out| formatter.write(document, out) })
         # Both files can hold credentials, so neither is world-readable.
         File.chmod(0o600, path)
       end
@@ -262,6 +262,12 @@ module Frogr
     rescue SystemCallError => e
       warn "frogr: could not write #{filename}: #{e.message}"
       false
+    end
+
+    # `compact` keeps element text on the same line as its tags, matching the
+    # output libxml2 gave upstream so the two versions' files look alike.
+    def formatter
+      @formatter ||= REXML::Formatters::Pretty.new(2).tap { |f| f.compact = true }
     end
 
     def add_text(parent, name, value)
