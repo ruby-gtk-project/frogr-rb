@@ -1,0 +1,13 @@
+# Ruby
+/.bundle/
+/vendor/bundle/
+*.gem
+
+# Nix
+/result
+/result-*
+.direnv/
+
+# Editors
+*~
+.#*
