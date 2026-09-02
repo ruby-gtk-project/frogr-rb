@@ -11,3 +11,6 @@
 # Editors
 *~
 .#*
+
+# Test output
+/tmp/

@@ -699,6 +699,11 @@ module Frogr
       def accounts_menu = @accounts_menu ||= Gio::Menu.new
 
       # --- Stateful actions ---------------------------------------------------
+      #
+      # The bindings unwrap GVariants on the way out but not on the way in:
+      # `action.state` and the `activate` parameter arrive as plain Ruby values
+      # (true, 'by_title'), while assigning state needs a GLib::Variant - a
+      # plain assignment aborts the process rather than raising.
 
       def sort_action
         @sort_action ||= Gio::SimpleAction.new(
@@ -706,8 +711,8 @@ module Frogr
           GLib::Variant.new(config.mainview_sorting_criteria.to_s)
         ).tap do |action|
           action.signal_connect('activate') do |_, parameter|
-            action.state = parameter
-            config.mainview_sorting_criteria = parameter.get_string.to_sym
+            action.state = GLib::Variant.new(parameter)
+            config.mainview_sorting_criteria = parameter.to_sym
             config.save_settings
             @controller.reorder_pictures
           end
@@ -719,7 +724,7 @@ module Frogr
           'sort-in-reverse-order', nil, GLib::Variant.new(config.mainview_sorting_reversed)
         ).tap do |action|
           action.signal_connect('activate') do
-            (!action.state.get_boolean).then do |value|
+            (!action.state).then do |value|
               action.state = GLib::Variant.new(value)
               config.mainview_sorting_reversed = value
               config.save_settings
@@ -734,7 +739,7 @@ module Frogr
           'enable-tooltips', nil, GLib::Variant.new(config.mainview_enable_tooltips)
         ).tap do |action|
           action.signal_connect('activate') do
-            (!action.state.get_boolean).then do |value|
+            (!action.state).then do |value|
               action.state = GLib::Variant.new(value)
               config.mainview_enable_tooltips = value
               config.save_settings
@@ -749,8 +754,8 @@ module Frogr
           'login-as', GLib::VariantType.new('s'), GLib::Variant.new('')
         ).tap do |action|
           action.signal_connect('activate') do |_, parameter|
-            action.state = parameter
-            @controller.active_account = parameter.get_string
+            action.state = GLib::Variant.new(parameter)
+            @controller.active_account = parameter
           end
         end
       end

@@ -33,6 +33,15 @@ These cover the places where a subtle mistake would not show up in the UI:
 OAuth 1.0a signature base strings, EXIF/XMP parsing, tag quoting, and the two
 on-disk formats that must stay compatible with upstream frogr.
 
+The UI is tested by running it, headlessly - no display server needed:
+
+```sh
+nix develop --command ruby test/drive_main_window.rb
+```
+
+It loads the fixtures, works the menu actions, edits through the details dialog
+and checks the model followed, writing screenshots to `tmp/shots/` as it goes.
+
 ## Layout
 
 ```
