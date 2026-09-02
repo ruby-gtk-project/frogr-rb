@@ -5,6 +5,7 @@ require 'gtk4'
 
 require_relative 'config'
 require_relative 'controller'
+require_relative 'gnome_compat'
 require_relative 'ui/main_view'
 require_relative 'util'
 require_relative 'version'

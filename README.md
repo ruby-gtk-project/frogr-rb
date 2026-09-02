@@ -60,6 +60,12 @@ po/, help/             translations and user documentation (carried over)
 
 ## Notes on the bindings
 
+Binding bugs found during the port - including a GVariant property setter that
+segfaults the interpreter - are written up with reproductions in
+[FINDINGS.md](FINDINGS.md). The workarounds live in `lib/frogr/gnome_compat.rb`
+and are covered by the test suite, which also reports when they stop being
+necessary.
+
 The `ruby-gtk` house guide records `Adwaita::ApplicationWindow` as unusable
 from Ruby. That is no longer true as of **ruby-gnome 4.3.8**: it builds,
 accepts actions, and — unlike `Gtk::ApplicationWindow` — lets `Adwaita::Dialog`

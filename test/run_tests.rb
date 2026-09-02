@@ -10,10 +10,13 @@
 $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 
 require 'fileutils'
+require 'rbconfig'
+require 'tempfile'
 require 'tmpdir'
 
 require 'frogr/config'
 require 'frogr/exif'
+require 'frogr/gnome_compat'
 require 'frogr/flickr/client'
 require 'frogr/model'
 
@@ -209,6 +212,65 @@ check 'an account missing its token is discarded on load' do
     File.write(File.join(dir, 'accounts.xml'),
                "<accounts><account version='2'><username>x</username></account></accounts>")
     Frogr::Config.new(config_dir: dir).accounts.empty?
+  end
+end
+
+puts 'ruby-gnome workarounds (FINDINGS.md)'
+
+# The raw bindings segfault on these, so the unpatched behaviour has to be
+# probed in a subprocess - an in-process check would take the suite with it.
+def raw_binding(code)
+  Tempfile.create(['probe', '.rb']) do |file|
+    file.write("require 'gtk4'\n#{code}\n")
+    file.flush
+    system(RbConfig.ruby, file.path, out: File::NULL, err: File::NULL)
+      .then { |ok| { ok: ok, status: $?.exitstatus, signal: $?.termsig } }
+  end
+end
+
+check 'the shim is still needed (raw setter segfaults)' do
+  raw_binding("a = Gio::SimpleAction.new('t', nil, GLib::Variant.new(true)); a.state = a.state")
+    .then do |result|
+      # If this ever stops crashing, the bindings have been fixed and
+      # lib/frogr/gnome_compat.rb can go. That is a good failure to get.
+      crashed = result[:signal] == 11 || result[:status] == 139
+      puts '       (note: raw setter no longer crashes - GnomeCompat may be removable)' unless crashed
+      crashed
+    end
+end
+
+check 'patched state= survives its own round trip' do
+  Gio::SimpleAction.new('t', nil, GLib::Variant.new(true)).then do |action|
+    action.state = action.state
+    action.state == true
+  end
+end
+
+check 'patched state= accepts plain booleans' do
+  Gio::SimpleAction.new('t', nil, GLib::Variant.new(true)).then do |action|
+    action.state = false
+    action.state == false
+  end
+end
+
+check 'patched state= accepts plain strings' do
+  Gio::SimpleAction.new('s', GLib::VariantType.new('s'), GLib::Variant.new('x')).then do |action|
+    action.state = 'y'
+    action.state == 'y'
+  end
+end
+
+check 'patched state= still accepts a GVariant' do
+  Gio::SimpleAction.new('t', nil, GLib::Variant.new(true)).then do |action|
+    action.state = GLib::Variant.new(false)
+    action.state == false
+  end
+end
+
+check 'patched action_target= keeps a plain value' do
+  Gtk::Button.new.tap { |b| b.action_name = 'app.x' }.then do |button|
+    button.action_target = 'hello'
+    button.action_target == 'hello'
   end
 end
 

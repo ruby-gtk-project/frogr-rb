@@ -392,7 +392,7 @@ module Frogr
           accounts_menu.append(account.display_name, "app.login-as::#{account.username}")
         end
 
-        login_action.state = GLib::Variant.new(@controller.active_account&.username.to_s)
+        login_action.state = @controller.active_account&.username.to_s
       end
 
       def show_context_menu(gesture, x, y)
@@ -700,10 +700,10 @@ module Frogr
 
       # --- Stateful actions ---------------------------------------------------
       #
-      # The bindings unwrap GVariants on the way out but not on the way in:
-      # `action.state` and the `activate` parameter arrive as plain Ruby values
-      # (true, 'by_title'), while assigning state needs a GLib::Variant - a
-      # plain assignment aborts the process rather than raising.
+      # The bindings unwrap GVariants on the way out: `action.state` and the
+      # `activate` parameter arrive as plain Ruby values (true, 'by_title').
+      # Assigning them back is only safe because Frogr::GnomeCompat repairs the
+      # setter - see FINDINGS.md #1, where the raw binding segfaults.
 
       def sort_action
         @sort_action ||= Gio::SimpleAction.new(
@@ -711,7 +711,7 @@ module Frogr
           GLib::Variant.new(config.mainview_sorting_criteria.to_s)
         ).tap do |action|
           action.signal_connect('activate') do |_, parameter|
-            action.state = GLib::Variant.new(parameter)
+            action.state = parameter
             config.mainview_sorting_criteria = parameter.to_sym
             config.save_settings
             @controller.reorder_pictures
@@ -725,7 +725,7 @@ module Frogr
         ).tap do |action|
           action.signal_connect('activate') do
             (!action.state).then do |value|
-              action.state = GLib::Variant.new(value)
+              action.state = value
               config.mainview_sorting_reversed = value
               config.save_settings
               @controller.reorder_pictures
@@ -740,7 +740,7 @@ module Frogr
         ).tap do |action|
           action.signal_connect('activate') do
             (!action.state).then do |value|
-              action.state = GLib::Variant.new(value)
+              action.state = value
               config.mainview_enable_tooltips = value
               config.save_settings
               update_ui
@@ -754,7 +754,7 @@ module Frogr
           'login-as', GLib::VariantType.new('s'), GLib::Variant.new('')
         ).tap do |action|
           action.signal_connect('activate') do |_, parameter|
-            action.state = GLib::Variant.new(parameter)
+            action.state = parameter
             @controller.active_account = parameter
           end
         end
